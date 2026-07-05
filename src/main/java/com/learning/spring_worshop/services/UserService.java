@@ -29,4 +29,23 @@ public class UserService {
         return userRepositorie.save(obj);
     }
 
+    public void deleteByid(Long id){
+        userRepositorie.deleteById(id);
+    }
+
+    public User put(Long id, User obj){
+        User entity = userRepositorie.getReferenceById(id);
+        setEntity(entity, obj);
+
+        return userRepositorie.save(entity);
+    }
+
+    public User setEntity(User entity, User obj){
+        entity.setName(obj.getName());
+        entity.setEmail(obj.getEmail());
+        entity.setPhone(obj.getPhone());
+        entity.setPassword(obj.getPassword());
+
+        return entity;
+    }
 }
