@@ -2,6 +2,7 @@ package com.learning.spring_worshop.services;
 
 import com.learning.spring_worshop.entities.User;
 import com.learning.spring_worshop.repositories.UserRepositorie;
+import com.learning.spring_worshop.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class UserService {
 
     public User findById(Long id){
         Optional<User> obj = userRepositorie.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public User insert(User obj){
